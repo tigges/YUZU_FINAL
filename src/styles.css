@@ -231,14 +231,21 @@ section[id] { scroll-margin-top: 88px; }
   box-shadow: 0 10px 30px rgb(28 25 22 / 22%);
 }
 
-.scroller { position: relative; }
+.scroller {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
 
 .scroller-track {
   display: flex;
   gap: 16px;
+  max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
   padding: 4px 48px 8px;
 }
 
