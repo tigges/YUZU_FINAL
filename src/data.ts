@@ -216,6 +216,10 @@ export const instagram = {
   following: '510',
   posts: '776',
   profile: asset('assets/instagram/profile.jpg'),
+  highlights: [
+    { title: 'Offers', src: asset('assets/instagram/00.jpg') },
+    { title: 'Portfolio', src: asset('assets/instagram/08.jpg') },
+  ],
   featured: [
     {
       src: asset('assets/instagram/09-1.jpg'),

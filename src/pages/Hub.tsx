@@ -1,6 +1,8 @@
-import { BOOKING_URL, LIVE_SITE_URL, ORIGINALS } from '../data'
+import { BOOKING_URL, LIVE_SITE_URL } from '../data'
 import { Ext, VersionBar } from '../ui'
-import { versionUrl, versions } from '../versions'
+import { versionUrl, versions, type VersionId } from '../versions'
+
+const groups = ['Rebuilt', 'September clones', 'From Round'] as const
 
 export default function Hub() {
   return (
@@ -15,49 +17,53 @@ export default function Hub() {
       <main id="main" className="wrap hub-main">
         <div className="hub-intro">
           <p className="kicker">Dickens Yard · Ealing</p>
-          <h1>Three directions, each one finished.</h1>
+          <h1>The three directions, the September pages, and a Japanese Round.</h1>
           <p>
-            Round, Instagram, and Hairlust from the September gallery, rebuilt around the same
-            salon: 5 Dickens Yard, Phorest booking, the 2025 menu, and the photographs already on
-            the site. The pages are shorter to use, and the type stays readable.
+            Round, Instagram, and Hairlust are rebuilt above. Under them, the same three pages
+            copied from the September gallery, unchanged. Japanese keeps Round’s rounded rooms
+            and resets the palette to ink, paper, and a seal.
           </p>
         </div>
 
-        <div className="hub-grid">
-          {versions.map((item) => (
-            <article className="hub-card" key={item.id}>
-              <a className="hub-card-media" href={versionUrl(item.id)}>
-                <img src={item.preview} alt={item.previewAlt} />
-              </a>
-              <div className="hub-card-body">
-                <p className="kicker">{item.kicker}</p>
-                <h2>
-                  <a href={versionUrl(item.id)}>{item.name}</a>
-                </h2>
-                <p>{item.summary}</p>
-                <p className="hub-was">
-                  <strong>September version. </strong>
-                  {item.was}
-                </p>
-                <div className="hub-card-actions">
-                  <a className="btn btn-ink" href={versionUrl(item.id)}>
-                    Open {item.name}
+        {groups.map((group) => (
+          <section className="hub-group" key={group} aria-labelledby={`group-${group}`}>
+            <h2 id={`group-${group}`} className="hub-group-title">{group}</h2>
+            <div className="hub-grid">
+              {versions.filter((item) => item.group === group).map((item) => (
+                <article className="hub-card" key={item.id}>
+                  <a className="hub-card-media" href={versionUrl(item.id as VersionId)}>
+                    <img src={item.preview} alt={item.previewAlt} />
                   </a>
-                  <Ext href={ORIGINALS[item.id]}>Compare</Ext>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+                  <div className="hub-card-body">
+                    <p className="kicker">{item.kicker}</p>
+                    <h2>
+                      <a href={versionUrl(item.id)}>{item.name}</a>
+                    </h2>
+                    <p>{item.summary}</p>
+                    <p className="hub-was">
+                      <strong>{item.noteLabel}. </strong>
+                      {item.note}
+                    </p>
+                    <div className="hub-card-actions">
+                      <a className="btn btn-ink" href={versionUrl(item.id)}>
+                        Open {item.name}
+                      </a>
+                      {item.origin ? <Ext href={item.origin}>September page</Ext> : null}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
 
         <aside className="hub-note">
           <h2>What stayed true</h2>
           <p>
             Address, hours, phone, and email are the Dickens Yard facts. Book goes to Phorest.
             Directions and Google reviews use the salon’s Maps link. Instagram, TikTok, and
-            Facebook are the live profiles. Prices are the 2025 senior and stylist menu. Offers
-            are Colour Tuesdays, Smooth Wednesdays, and Thursday colour — the pictures and the
-            sentences now say the same thing.
+            Facebook are the live profiles. The clones keep the September wording, including
+            where an offer title and its picture do not match.
           </p>
           <div className="hub-card-actions">
             <Ext className="btn btn-ink" href={LIVE_SITE_URL}>

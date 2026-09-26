@@ -1,0 +1,325 @@
+.jp {
+  --ink: #1b1b1b;
+  --muted: #5c5852;
+  --paper: #f6f1e7;
+  --card: #fffdf8;
+  --seal: #9d1c1c;
+  --line: #e4dccf;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Zen Kaku Gothic New', Outfit, sans-serif;
+}
+
+.jp h1, .jp h2, .jp h3, .jp-seal, .jp-vertical {
+  font-family: 'Shippori Mincho', 'Times New Roman', serif;
+  font-weight: 500;
+}
+
+.jp-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.jp-header-inner {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.jp-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.jp-seal {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--seal);
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.jp-brand strong {
+  display: block;
+  letter-spacing: 0.22em;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.jp-brand em {
+  display: block;
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.jp-nav { display: flex; align-items: center; gap: 18px; }
+.jp-nav a { text-decoration: none; }
+.jp-nav a[aria-current='page'] {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.jp-book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--seal);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.jp-book:hover { background: #7c1515; color: #fff; }
+
+.jp-quiet {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+}
+
+.jp-quiet:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.jp-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  place-items: center;
+}
+
+.jp-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  width: min(1120px, calc(100% - 40px));
+  margin: 28px auto 8px;
+  padding: 0;
+}
+
+.jp-vertical {
+  writing-mode: vertical-rl;
+  margin: 8px 0;
+  letter-spacing: 0.42em;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.jp-hero-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: center;
+  background: var(--card);
+  border-radius: 36px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgb(40 30 16 / 6%);
+}
+
+.jp-kicker {
+  margin: 0 0 8px;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+.jp-hero h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin: 0 0 12px; line-height: 1.1; }
+.jp-hero-copy > p { color: var(--muted); margin: 0; }
+.jp-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+
+.jp-hero figure { margin: 0; }
+.jp-hero img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 28px;
+}
+
+.jp-note {
+  margin: 22px auto;
+  padding: 14px 18px;
+  background: var(--card);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.jp-section { padding: 56px 0; }
+.jp-head { max-width: 36rem; margin-bottom: 22px; }
+.jp-head h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 8px; }
+.jp-head p { margin: 0; color: var(--muted); }
+
+.jp-gallery, .jp-services, .jp-offers, .jp-reviews {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.jp-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.jp-gallery li {
+  background: var(--card);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.jp-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.jp-gallery span { display: block; padding: 12px 14px 14px; }
+
+.jp-services {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.jp-services li {
+  background: var(--card);
+  border-radius: 28px;
+  padding: 18px 16px;
+}
+
+.jp-services h3 { margin: 0 0 8px; font-size: 1.35rem; }
+.jp-services p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.jp-from { margin-top: 14px; color: var(--ink); }
+
+.jp-prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.jp-prices div {
+  background: var(--card);
+  border-radius: 28px;
+  padding: 16px;
+}
+
+.jp-prices h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.jp-prices ul { list-style: none; margin: 0; padding: 0; }
+.jp-prices li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.jp-offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.jp-offers a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--card);
+  border-radius: 28px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.jp-offers img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.jp-offers .jp-kicker, .jp-offers strong, .jp-offers em { margin: 0 16px; }
+.jp-offers strong { font-size: 1.45rem; font-weight: 500; }
+.jp-offers em { font-style: normal; color: var(--muted); font-size: 0.92rem; padding-bottom: 16px; }
+
+.jp-reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.jp-reviews li {
+  background: var(--card);
+  border-radius: 28px;
+  padding: 18px 16px;
+}
+.jp-reviews h3 { margin: 0 0 8px; font-size: 1.35rem; }
+.jp-reviews p { margin: 0 0 12px; color: var(--muted); }
+
+.jp-visit { padding-bottom: 48px; }
+.jp-visit-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 220px;
+  gap: 22px;
+  align-items: start;
+  background: var(--card);
+  border-radius: 36px;
+  padding: 28px;
+}
+.jp-visit h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 8px; }
+.jp-visit .jp-book { margin-top: 12px; }
+.jp-portrait { margin: 0; }
+.jp-portrait img {
+  width: 100%;
+  border-radius: 28px;
+  background: var(--paper);
+}
+.jp-map {
+  margin-top: 14px;
+  height: 280px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+.jp-map iframe { width: 100%; height: 100%; border: 0; }
+
+.jp-footer { padding: 8px 0 36px; color: var(--muted); font-size: 0.9rem; }
+.jp-footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 980px) {
+  .jp-hero-card, .jp-services, .jp-prices, .jp-visit-grid { grid-template-columns: 1fr 1fr; }
+  .jp-portrait { display: none; }
+}
+
+@media (max-width: 800px) {
+  .jp-hero { grid-template-columns: 1fr; width: min(1120px, calc(100% - 28px)); }
+  .jp-vertical { writing-mode: horizontal-tb; letter-spacing: 0.18em; margin: 0; }
+  .jp-toggle { display: grid; }
+  .jp-nav { display: none; }
+  .jp-header.open .jp-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--paper);
+    padding: 8px 22px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .jp-header.open .jp-nav a { padding: 12px 0; }
+  .jp-hero-card, .jp-gallery, .jp-services, .jp-prices, .jp-offers, .jp-reviews, .jp-visit-grid {
+    grid-template-columns: 1fr;
+  }
+  .jp-note { border-radius: 20px; }
+  .jp-footer .wrap { flex-direction: column; }
+}

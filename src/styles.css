@@ -72,6 +72,8 @@ button, summary { font-family: inherit; }
 
 .skip:focus { top: 12px; }
 
+.sept-host { display: block; }
+
 .wrap {
   width: min(var(--max), calc(100% - 40px));
   margin-inline: auto;
@@ -294,7 +296,9 @@ section[id] { scroll-margin-top: 88px; }
 
 .hub-main { padding: 48px 0 80px; }
 
-.hub-intro { max-width: 40rem; margin-bottom: 36px; }
+.hub-group { margin-bottom: 36px; }
+.hub-group-title { font-size: 1.1rem; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--sans); font-weight: 600; margin: 0 0 14px; }
+.hub-intro { max-width: 42rem; margin-bottom: 36px; }
 .hub-intro h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin-bottom: 14px; }
 .hub-intro p:last-child { color: var(--muted); font-size: 1.08rem; }
 
