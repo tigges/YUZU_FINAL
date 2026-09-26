@@ -699,7 +699,7 @@ body[data-theme='instagram'] { background: #f6f1ea; color: #243024; }
   border-radius: 28px;
 }
 
-.ig-work { padding: 56px 0 20px; }
+.ig-work { padding: 36px 0 20px; }
 
 .ig-pair {
   display: grid;
@@ -716,7 +716,7 @@ body[data-theme='instagram'] { background: #f6f1ea; color: #243024; }
   overflow: hidden;
 }
 
-.ig-pair img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.ig-pair img { width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; object-position: center 28%; }
 .ig-pair figcaption { padding: 12px 14px 16px; display: flex; flex-direction: column; gap: 2px; }
 .ig-pair figcaption span { color: #5c6754; font-size: 0.92rem; }
 

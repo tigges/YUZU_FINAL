@@ -21,7 +21,7 @@ import {
   useSection,
 } from '../ui'
 
-const sections = ['top', 'work', 'feed', 'offers', 'visit'] as const
+const sections = ['top', 'feed', 'work', 'offers', 'visit'] as const
 const filters = [
   { id: 'all', label: 'All' },
   { id: 'offers', label: 'Offers' },
@@ -32,8 +32,8 @@ const filters = [
 type FilterId = (typeof filters)[number]['id']
 
 const nav = [
-  { href: '#work', label: 'Work' },
   { href: '#feed', label: 'Feed' },
+  { href: '#work', label: 'Work' },
   { href: '#offers', label: 'Offers' },
   { href: '#visit', label: 'Visit' },
 ]
@@ -126,36 +126,6 @@ export default function Instagram() {
           </figure>
         </section>
 
-        <section className="ig-work wrap" id="work">
-          <div className="section-head">
-            <p className="kicker">Portfolio</p>
-            <h2>Shot in the Dickens Yard room.</h2>
-            <p>A copper balayage on the same client, then the blonde that sits beside it in the feed.</p>
-          </div>
-          <div className="ig-pair">
-            {instagram.featured.map((item) => (
-              <figure key={item.src}>
-                <img src={item.src} alt={item.alt} width={1080} height={1137} />
-                <figcaption>
-                  <strong>{item.title}</strong>
-                  <span>{item.detail}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <div className="ig-pair ig-pair-quiet">
-            {instagram.blonde.map((item) => (
-              <figure key={item.src}>
-                <img src={item.src} alt={item.alt} width={1080} height={1080} />
-                <figcaption>
-                  <strong>{item.title}</strong>
-                  <span>{item.detail}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
         <section className="ig-feed" id="feed">
           <div className="wrap">
             <div className="ig-feed-bar">
@@ -186,6 +156,36 @@ export default function Instagram() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        <section className="ig-work wrap" id="work">
+          <div className="section-head">
+            <p className="kicker">Portfolio</p>
+            <h2>Shot in the Dickens Yard room.</h2>
+            <p>A copper balayage on the same client, then the blonde that sits beside it in the feed.</p>
+          </div>
+          <div className="ig-pair">
+            {instagram.featured.map((item) => (
+              <figure key={item.src}>
+                <img src={item.src} alt={item.alt} width={1080} height={1137} />
+                <figcaption>
+                  <strong>{item.title}</strong>
+                  <span>{item.detail}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className="ig-pair ig-pair-quiet">
+            {instagram.blonde.map((item) => (
+              <figure key={item.src}>
+                <img src={item.src} alt={item.alt} width={1080} height={1080} />
+                <figcaption>
+                  <strong>{item.title}</strong>
+                  <span>{item.detail}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
