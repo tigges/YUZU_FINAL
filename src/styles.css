@@ -445,7 +445,7 @@ section[id] { scroll-margin-top: 88px; }
   box-shadow: 0 10px 24px rgb(50 32 16 / 5%);
 }
 
-.round-shot img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.round-shot img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; object-position: center 22%; }
 .round-shot span { display: block; padding: 12px 14px 14px; font-size: 0.92rem; }
 
 .round-services {
@@ -464,6 +464,7 @@ section[id] { scroll-margin-top: 88px; }
 .round-services p, .round-extras span { color: var(--muted); margin-bottom: 0; }
 .price-from { margin: 16px 0 8px; color: var(--ink); }
 .round-services a { font-size: 0.92rem; }
+.round-services-cta { margin: 22px 0 0; }
 
 .round-offers-band { padding-top: 8px; }
 
@@ -485,7 +486,7 @@ section[id] { scroll-margin-top: 88px; }
   color: inherit;
 }
 
-.round-offers img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.round-offers img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: center; }
 .round-offers .kicker, .round-offers strong, .round-offers em { margin: 0 16px; }
 .round-offers strong { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; font-style: normal; }
 .round-offers em { font-style: normal; color: var(--muted); font-size: 0.92rem; padding-bottom: 16px; }
@@ -537,7 +538,9 @@ section[id] { scroll-margin-top: 88px; }
 .round-about p { color: var(--muted); }
 
 .price-group { margin-bottom: 28px; }
-.price-group h3 { font-size: 1.4rem; margin-bottom: 8px; }
+.price-group h2, .price-group h3 { font-size: 1.4rem; margin-bottom: 8px; }
+.round-sub h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 8px; }
+.round-back { display: inline-block; margin-bottom: 18px; }
 
 .price-group table {
   width: 100%;

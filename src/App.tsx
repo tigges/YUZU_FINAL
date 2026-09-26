@@ -16,7 +16,13 @@ export default function App() {
 
   useEffect(() => {
     document.body.dataset.theme = version ?? 'hub'
-    document.title = (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
+    const page = new URLSearchParams(window.location.search).get('p')
+    document.title =
+      version === 'round' && page === 'prices'
+        ? 'Prices · Yuzu Hair & Beauty, Ealing'
+        : version === 'round' && page === 'questions'
+          ? 'Questions · Yuzu Hair & Beauty, Ealing'
+          : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
   }, [version])
 
   if (version === 'round') return <Round />
