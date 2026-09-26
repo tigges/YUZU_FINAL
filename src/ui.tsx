@@ -19,7 +19,7 @@ export function VersionBar({ current }: { current: VersionId | null }) {
       <nav aria-label="Design versions">
         {versions.map((item) => (
           <a key={item.id} href={versionUrl(item.id)} aria-current={item.id === current ? 'page' : undefined}>
-            {item.name}
+            {item.label}
           </a>
         ))}
       </nav>
