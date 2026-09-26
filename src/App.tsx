@@ -28,7 +28,9 @@ export default function App() {
         ? 'Prices · Yuzu Hair & Beauty, Ealing'
         : version === 'round' && page === 'questions'
           ? 'Questions · Yuzu Hair & Beauty, Ealing'
-          : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
+          : version === 'round' && page === 'patch'
+            ? 'Patch testing · Yuzu Hair & Beauty, Ealing'
+            : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
   }, [version])
 
   if (version === 'round') return <Round />
