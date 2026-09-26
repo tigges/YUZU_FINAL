@@ -870,11 +870,14 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 .hl-stroke:hover { background: #111; color: #fff; }
 
 .hl-announce {
+  position: relative;
+  z-index: 3;
   background: #e6e3f4;
   color: #161428;
   text-align: center;
-  padding: 10px 20px;
+  padding: 12px 28px;
   font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 .hl-announce a { color: inherit; }
@@ -882,11 +885,13 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 .hl-header { background: #fff; border-bottom: 1px solid #eee; }
 
 .hl-bar {
-  min-height: 78px;
+  min-height: 72px;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  padding-block: 10px;
 }
 
 .hl-menu-btn {
@@ -901,10 +906,11 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
   font-size: 0.95rem;
 }
 
-.hl-logo { grid-column: 2; }
-.hl-logo img { height: 36px; width: auto; }
+.hl-menu-btn { grid-column: 1; grid-row: 1; }
+.hl-logo { grid-column: 2; grid-row: 1; justify-self: center; }
+.hl-logo img { height: 32px; width: auto; display: block; }
 .hl-nav { display: none; }
-.hl-tools { justify-self: end; display: flex; align-items: center; gap: 14px; }
+.hl-tools { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; gap: 14px; }
 .hl-tool { text-decoration: none; font-size: 0.92rem; }
 
 .hl-nav a, .hl-drawer a {
@@ -935,7 +941,7 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 
 .hl-hero {
   position: relative;
-  min-height: min(88vh, 860px);
+  min-height: min(68vh, 680px);
   background: #1a1412;
   color: #fff;
 }
@@ -1023,8 +1029,8 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 .hl-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
 .hl-card h3 { margin: 12px 6px 4px; font-size: 1.55rem; }
 .hl-card p { margin: 0 6px; color: #555; font-size: 0.92rem; }
-.hl-from { margin-top: 10px; color: #111; font-weight: 600; }
-.hl-card .btn { margin: 12px 6px 0; }
+.hl-card .hl-from { margin: auto 6px 0; padding-top: 10px; color: #111; font-weight: 600; }
+.hl-card .btn { margin: 12px 6px 0; align-self: flex-start; }
 
 .hl-tiles {
   display: grid;
@@ -1110,7 +1116,7 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 }
 
 .hl-offer-grid li { display: flex; flex-direction: column; gap: 6px; }
-.hl-offer-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 18px; }
+.hl-offer-grid img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center; border-radius: 18px; }
 .hl-offer-grid h3 { margin: 0; font-size: 1.7rem; }
 .hl-offer-grid p { margin: 0; color: #444; }
 
@@ -1159,6 +1165,7 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
   .hl-nav {
     display: flex;
     grid-column: 1;
+    grid-row: 1;
     justify-self: start;
     gap: 4px;
     align-items: center;
@@ -1257,7 +1264,7 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
   .hl-tile, .hl-tile:first-child { min-height: 300px; grid-column: auto; }
   .hl-facts li { border-right: 0; border-bottom: 1px solid #ececec; }
   .hl-tool { display: none; }
-  .hl-hero { min-height: 78vh; }
+  .hl-hero { min-height: 62vh; }
   .hl-hero-copy { width: calc(100% - 32px); margin-left: 16px; padding-bottom: 96px; }
   .round-footer .wrap, .ig-footer .wrap { flex-direction: column; }
   .version-bar { align-items: flex-start; }
