@@ -6,7 +6,7 @@ import {
   MAPS_EMBED_URL,
   OFFERS_PAGE_URL,
   PATCH_TEST_PDF_URL,
-  PRICE_LIST_URL,
+  TERMS_URL,
   WHATSAPP_URL,
   contact,
   extras,
@@ -32,17 +32,93 @@ import {
   useSection,
 } from '../ui'
 
-const sections = ['top', 'gallery', 'services', 'offers', 'prices', 'visit'] as const
+const sections = ['top', 'gallery', 'services', 'offers', 'visit'] as const
 
 const nav = [
-  { href: '#gallery', label: 'Gallery' },
-  { href: '#services', label: 'Services' },
-  { href: '#offers', label: 'Offers' },
-  { href: '#prices', label: 'Prices' },
-  { href: '#visit', label: 'Visit' },
+  { id: 'gallery', label: 'Gallery' },
+  { id: 'services', label: 'Services' },
+  { id: 'offers', label: 'Offers' },
+  { id: 'visit', label: 'Visit' },
 ]
 
+const shots = gallery.slice(0, 3)
+const home = `${import.meta.env.BASE_URL}?v=round`
+const pricesHref = `${home}&p=prices`
+const questionsHref = `${home}&p=questions`
+
+type RoundPage = 'home' | 'prices' | 'questions'
+
+function readRoundPage(): RoundPage {
+  const value = new URLSearchParams(window.location.search).get('p')
+  if (value === 'prices' || value === 'questions') return value
+  return 'home'
+}
+
+function PricesBody() {
+  return (
+    <>
+      <div className="section-head">
+        <h1>Prices</h1>
+        <p>Senior and stylist menus. Call {contact.phone} for long hair or a colour correction.</p>
+      </div>
+      {priceGroups.map((group) => (
+        <div className="price-group" key={group.title}>
+          <h2>{group.title}</h2>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Senior</th>
+                <th scope="col">Stylist</th>
+              </tr>
+            </thead>
+            <tbody>
+              {group.rows.map((row) => (
+                <tr key={row.name}>
+                  <th scope="row">{row.name}</th>
+                  <td data-label="Senior">{row.senior}</td>
+                  <td data-label="Stylist">{row.stylist}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+      <div className="price-group">
+        <h2>Treatments</h2>
+        <ul className="treatment-list">
+          {treatments.map((item) => (
+            <li key={item.name}>
+              <span>{item.name}</span>
+              <span>{item.price}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  )
+}
+
+function QuestionsBody() {
+  return (
+    <>
+      <div className="section-head">
+        <h1>Questions</h1>
+      </div>
+      <div className="faq">
+        {faqs.map((item) => (
+          <details key={item.question}>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </>
+  )
+}
+
 export default function Round() {
+  const page = readRoundPage()
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState<number | null>(null)
   const closeBtn = useRef<HTMLButtonElement>(null)
@@ -55,7 +131,7 @@ export default function Round() {
     (dir: number) => {
       setActive((value) => {
         if (value === null) return value
-        return (value + dir + gallery.length) % gallery.length
+        return (value + dir + shots.length) % shots.length
       })
     },
     [],
@@ -79,20 +155,27 @@ export default function Round() {
       <Skip />
       <header className={`round-header${menuOpen ? ' open' : ''}`}>
         <div className="wrap round-header-inner">
-          <a className="round-logo" href="#top" onClick={onSamePage('#top', closeMenu)}>
+          <a
+            className="round-logo"
+            href={page === 'home' ? '#top' : home}
+            onClick={page === 'home' ? onSamePage('#top', closeMenu) : closeMenu}
+          >
             <img src={media.logo} alt="Yuzu Hair & Beauty" width={234} height={80} />
           </a>
           <nav className="round-nav" aria-label="Primary">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={onSamePage(item.href, closeMenu)}
-                aria-current={current === item.href.slice(1) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
+            {nav.map((item) => {
+              const hash = `#${item.id}`
+              return (
+                <a
+                  key={item.id}
+                  href={page === 'home' ? hash : `${home}${hash}`}
+                  onClick={page === 'home' ? onSamePage(hash, closeMenu) : closeMenu}
+                  aria-current={page === 'home' && current === item.id ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              )
+            })}
             <Ext className="btn btn-book" href={BOOKING_URL}>
               Book
             </Ext>
@@ -109,6 +192,7 @@ export default function Round() {
         </div>
       </header>
 
+      {page === 'home' ? (
       <main id="main">
         <section className="round-hero" id="top" aria-labelledby="round-hero-title">
           <div className="wrap">
@@ -131,7 +215,7 @@ export default function Round() {
                 <Ext className="btn btn-book" href={BOOKING_URL}>
                   Book your appointment
                 </Ext>
-                <a className="btn btn-ghost" href="#prices" onClick={onSamePage('#prices')}>
+                <a className="btn btn-ghost" href={pricesHref}>
                   See prices
                 </a>
               </div>
@@ -151,10 +235,10 @@ export default function Round() {
           <div className="wrap">
             <div className="section-head">
               <h2>Gallery</h2>
-              <p>Six recent finishes from the Dickens Yard chair.</p>
+              <p>Three recent finishes from the Dickens Yard chair.</p>
             </div>
             <ul className="round-gallery">
-              {gallery.map((item, index) => (
+              {shots.map((item, index) => (
                 <li key={item.src}>
                   <button type="button" className="round-shot" onClick={() => setActive(index)}>
                     <img src={item.src} alt="" width={567} height={567} />
@@ -180,12 +264,15 @@ export default function Round() {
                   <p className="price-from">
                     From <strong>{item.from}</strong>
                   </p>
-                  <a href="#prices" onClick={onSamePage('#prices')}>
-                    Full menu
-                  </a>
+                  <a href={pricesHref}>Full menu</a>
                 </li>
               ))}
             </ul>
+            <p className="round-services-cta">
+              <a className="btn btn-ink" href={pricesHref}>
+                See prices
+              </a>
+            </p>
           </div>
         </section>
 
@@ -264,71 +351,6 @@ export default function Round() {
           </div>
         </section>
 
-        <section className="round-section" id="prices">
-          <div className="wrap">
-            <div className="section-head">
-              <h2>Prices</h2>
-              <p>
-                Senior and stylist menus. Call {contact.phone} for long hair or a colour correction.
-                The PDF is the same 2025 list.
-              </p>
-            </div>
-            {priceGroups.map((group) => (
-              <div className="price-group" key={group.title}>
-                <h3>{group.title}</h3>
-                <table>
-                  <thead>
-                    <tr>
-                      <th scope="col">Service</th>
-                      <th scope="col">Senior</th>
-                      <th scope="col">Stylist</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {group.rows.map((row) => (
-                      <tr key={row.name}>
-                        <th scope="row">{row.name}</th>
-                        <td data-label="Senior">{row.senior}</td>
-                        <td data-label="Stylist">{row.stylist}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ))}
-            <div className="price-group">
-              <h3>Treatments</h3>
-              <ul className="treatment-list">
-                {treatments.map((item) => (
-                  <li key={item.name}>
-                    <span>{item.name}</span>
-                    <span>{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Ext className="btn btn-ink" href={PRICE_LIST_URL}>
-              Download the 2025 PDF
-            </Ext>
-          </div>
-        </section>
-
-        <section className="round-section" id="questions">
-          <div className="wrap">
-            <div className="section-head">
-              <h2>Questions</h2>
-            </div>
-            <div className="faq">
-              {faqs.map((item) => (
-                <details key={item.question}>
-                  <summary>{item.question}</summary>
-                  <p>{item.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="round-section" id="visit">
           <div className="wrap round-visit">
             <div>
@@ -371,6 +393,16 @@ export default function Round() {
           </div>
         </section>
       </main>
+      ) : (
+        <main id="main" className="round-section round-sub">
+          <div className="wrap">
+            <a className="round-back" href={home}>
+              ← Home
+            </a>
+            {page === 'prices' ? <PricesBody /> : <QuestionsBody />}
+          </div>
+        </main>
+      )}
 
       <footer className="round-footer">
         <div className="wrap">
@@ -379,21 +411,18 @@ export default function Round() {
             {contact.phone}
           </p>
           <p>
-            <Ext href={PRICE_LIST_URL}>Price list</Ext>
+            <a href={questionsHref}>Questions</a>
             {' · '}
             <Ext href={PATCH_TEST_PDF_URL}>Patch testing</Ext>
             {' · '}
-            <a href="https://www.yuzuhairandbeauty.london/terms-and-conditions" target="_blank" rel="noreferrer">
-              Terms
-              <span className="vh"> (opens in a new tab)</span>
-            </a>
+            <Ext href={TERMS_URL}>Terms</Ext>
           </p>
         </div>
       </footer>
       <MobileBook href={BOOKING_URL} />
 
-      {active !== null ? (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label={gallery[active].title}>
+      {page === 'home' && active !== null ? (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={shots[active].title}>
           <button ref={closeBtn} className="lightbox-close" type="button" onClick={closeLightbox}>
             Close
           </button>
@@ -401,8 +430,8 @@ export default function Round() {
             ‹
           </button>
           <figure>
-            <img src={gallery[active].src} alt={gallery[active].alt} />
-            <figcaption>{gallery[active].title}</figcaption>
+            <img src={shots[active].src} alt={shots[active].alt} />
+            <figcaption>{shots[active].title}</figcaption>
           </figure>
           <button className="lightbox-nav next" type="button" aria-label="Next photo" onClick={() => step(1)}>
             ›
