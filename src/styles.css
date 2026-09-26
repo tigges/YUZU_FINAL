@@ -695,7 +695,7 @@ body[data-theme='instagram'] { background: #f6f1ea; color: #243024; }
 .ig-hero-photo img {
   width: 100%;
   height: auto;
-  aspect-ratio: 8 / 5;
+  aspect-ratio: 32 / 25;
   object-fit: cover;
   object-position: center 28%;
   border-radius: 28px;
