@@ -5,7 +5,6 @@ import {
   MAPS_DIRECTIONS_URL,
   MAPS_EMBED_URL,
   OFFERS_PAGE_URL,
-  PATCH_TEST_PDF_URL,
   TERMS_URL,
   WHATSAPP_URL,
   contact,
@@ -45,12 +44,13 @@ const shots = gallery.slice(0, 3)
 const home = `${import.meta.env.BASE_URL}?v=round`
 const pricesHref = `${home}&p=prices`
 const questionsHref = `${home}&p=questions`
+const patchHref = `${home}&p=patch`
 
-type RoundPage = 'home' | 'prices' | 'questions'
+type RoundPage = 'home' | 'prices' | 'questions' | 'patch'
 
 function readRoundPage(): RoundPage {
   const value = new URLSearchParams(window.location.search).get('p')
-  if (value === 'prices' || value === 'questions') return value
+  if (value === 'prices' || value === 'questions' || value === 'patch') return value
   return 'home'
 }
 
@@ -94,6 +94,33 @@ function PricesBody() {
             </li>
           ))}
         </ul>
+      </div>
+    </>
+  )
+}
+
+function PatchBody() {
+  return (
+    <>
+      <div className="section-head">
+        <h1>Patch testing</h1>
+        <p>Mandatory before any colour service, for new and existing clients.</p>
+      </div>
+      <div className="round-prose">
+        <p>
+          At Yuzu Hair, colour services need a mandatory patch test — an allergy alert test — before
+          any colour service. That includes both existing and new clients, as part of the updated
+          colour line.
+        </p>
+        <p>
+          The test checks for a possible reaction to hair dye. A small amount is applied behind the
+          ear, then watched for irritation or redness over 48 hours.
+        </p>
+        <p>
+          Please complete the patch test at least 48 hours before the appointment. You can walk in
+          for a patch test even if you do not have a booking. Ask at reception.
+        </p>
+        <p>Thank you, the Yuzu team.</p>
       </div>
     </>
   )
@@ -227,7 +254,7 @@ export default function Round() {
           <p className="round-notice">
             Colour guests, including existing clients, need a patch test at least 48 hours before
             the appointment.{' '}
-            <Ext href={PATCH_TEST_PDF_URL}>Patch testing notes</Ext>
+            <a href={patchHref}>Patch testing notes</a>
           </p>
         </div>
 
@@ -399,7 +426,7 @@ export default function Round() {
             <a className="round-back" href={home}>
               ← Home
             </a>
-            {page === 'prices' ? <PricesBody /> : <QuestionsBody />}
+            {page === 'prices' ? <PricesBody /> : page === 'questions' ? <QuestionsBody /> : <PatchBody />}
           </div>
         </main>
       )}
@@ -413,7 +440,7 @@ export default function Round() {
           <p>
             <a href={questionsHref}>Questions</a>
             {' · '}
-            <Ext href={PATCH_TEST_PDF_URL}>Patch testing</Ext>
+            <a href={patchHref}>Patch testing</a>
             {' · '}
             <Ext href={TERMS_URL}>Terms</Ext>
           </p>
