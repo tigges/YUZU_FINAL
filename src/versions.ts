@@ -115,6 +115,20 @@ export const versions = [
     previewAlt: 'Wavy brunette hair, photographed at Yuzu Hair & Beauty',
     origin: null,
   },
+  {
+    id: 'spark',
+    label: 'Spark',
+    name: 'Spark',
+    group: 'Inspired',
+    kicker: 'New',
+    summary:
+      'A clean marketing page in the Spark Mail rhythm: a three-word headline, two buttons, a large photo, then cards for cut, colour, and the weekday offers.',
+    noteLabel: 'Inspired by',
+    note: 'sparkmailapp.com — the airy headline and card layout, set in Yuzu paper, ink, and clay.',
+    preview: asset('assets/clean/hero.jpg'),
+    previewAlt: 'Wavy brunette hair, photographed at Yuzu Hair & Beauty',
+    origin: null,
+  },
 ] as const
 
 export type VersionId = (typeof versions)[number]['id']

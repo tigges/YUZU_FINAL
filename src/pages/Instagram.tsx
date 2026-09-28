@@ -20,6 +20,7 @@ import {
   useBodyLock,
   useSection,
 } from '../ui'
+import { LegalArticle, readLegalParam } from '../legal'
 
 const sections = ['top', 'feed', 'work', 'offers', 'visit'] as const
 const filters = [
@@ -39,6 +40,8 @@ const nav = [
 ]
 
 export default function Instagram() {
+  const legal = readLegalParam()
+  const home = `${import.meta.env.BASE_URL}?v=instagram`
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter] = useState<FilterId>('all')
   const current = useSection(sections)
@@ -52,7 +55,7 @@ export default function Instagram() {
       <Skip />
       <header className={`ig-header${menuOpen ? ' open' : ''}`}>
         <div className="wrap ig-header-inner">
-          <a className="ig-logo" href="#top" onClick={onSamePage('#top', closeMenu)}>
+          <a className="ig-logo" href={legal ? home : '#top'} onClick={legal ? closeMenu : onSamePage('#top', closeMenu)}>
             <img src={instagram.profile} alt="" width={320} height={320} />
             <span>
               <strong>YUZU</strong>
@@ -63,9 +66,9 @@ export default function Instagram() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
-                onClick={onSamePage(item.href, closeMenu)}
-                aria-current={current === item.href.slice(1) ? 'page' : undefined}
+                href={legal ? `${home}${item.href}` : item.href}
+                onClick={legal ? closeMenu : onSamePage(item.href, closeMenu)}
+                aria-current={!legal && current === item.href.slice(1) ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -86,6 +89,16 @@ export default function Instagram() {
         </div>
       </header>
 
+      {legal ? (
+        <main id="main" className="round-section">
+          <div className="wrap">
+            <a className="round-back" href={home}>
+              ← Home
+            </a>
+            <LegalArticle kind={legal} />
+          </div>
+        </main>
+      ) : (
       <main id="main">
         <section className="ig-hero wrap" id="top">
           <div className="ig-hero-copy">
@@ -249,13 +262,17 @@ export default function Instagram() {
           </div>
         </section>
       </main>
+      )}
 
       <footer className="ig-footer">
         <div className="wrap">
-          <span>
-            © {new Date().getFullYear()} Yuzu Hair &amp; Beauty
-          </span>
-          <Ext href={social.instagram}>{instagram.handle}</Ext>
+          <span>© {new Date().getFullYear()} Yuzu Hair &amp; Beauty</span>
+          <SocialRow />
+          <p>
+            <a href={`${home}&p=terms`}>Terms</a>
+            {' · '}
+            <a href={`${home}&p=privacy`}>Privacy</a>
+          </p>
         </div>
       </footer>
       <MobileBook href={BOOKING_URL} />

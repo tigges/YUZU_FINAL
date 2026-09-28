@@ -44,20 +44,67 @@ export function Ext({
   )
 }
 
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="17.4" cy="6.6" r="1" fill="currentColor" />
+    </svg>
+  )
+}
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M14.2 3h2.3c.2 1.7 1.2 3.2 2.7 4.1 1 .6 2.1.9 3.2.9v2.4c-1.6 0-3.1-.5-4.4-1.3v6.6c0 3.4-2.7 6.2-6.2 6.3-3.4 0-6.2-2.8-6.2-6.3s2.8-6.2 6.2-6.2c.3 0 .6 0 .9.1v2.5c-.3-.1-.6-.2-.9-.2-2 0-3.6 1.6-3.6 3.7s1.6 3.7 3.6 3.7 3.6-1.6 3.6-3.7V3Z" />
+    </svg>
+  )
+}
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M14.5 8.5V6.8c0-.7.5-1.1 1.2-1.1h1.3V3h-2.3C12.3 3 11 4.4 11 6.6v2H9v2.7h2V21h3.5v-9.8h2.3l.4-2.7h-2.7Z" />
+    </svg>
+  )
+}
+
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M4 7.2 12 13l8-5.8" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  )
+}
+
 export function SocialRow() {
   return (
     <ul className="socials">
       <li>
-        <Ext href={social.instagram}>Instagram</Ext>
+        <Ext href={social.instagram}>
+          <InstagramIcon />
+          <span className="vh">Instagram</span>
+        </Ext>
       </li>
       <li>
-        <Ext href={social.tiktok}>TikTok</Ext>
+        <Ext href={social.tiktok}>
+          <TikTokIcon />
+          <span className="vh">TikTok</span>
+        </Ext>
       </li>
       <li>
-        <Ext href={social.facebook}>Facebook</Ext>
+        <Ext href={social.facebook}>
+          <FacebookIcon />
+          <span className="vh">Facebook</span>
+        </Ext>
       </li>
       <li>
-        <a href={social.email}>Email</a>
+        <a href={social.email}>
+          <MailIcon />
+          <span className="vh">Email</span>
+        </a>
       </li>
     </ul>
   )

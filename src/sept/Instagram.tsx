@@ -1,4 +1,5 @@
 import { BOOKING_URL, contact, instagram, social } from '../data'
+import { versionUrl } from '../versions'
 import { SocialLinks } from './SocialLinks'
 
 function ReelBadge() {
@@ -157,9 +158,12 @@ export default function Instagram() {
       <footer className="ig-footer">
         <div className="wrap">
           <span>© {new Date().getFullYear()} Yuzu Hair &amp; Beauty</span>
-          <a href={social.instagram} target="_blank" rel="noreferrer">
-            Instagram
-          </a>
+          <SocialLinks />
+          <p>
+            <a href={`${versionUrl('instagram-sept')}&p=terms`}>Terms</a>
+            {' · '}
+            <a href={`${versionUrl('instagram-sept')}&p=privacy`}>Privacy</a>
+          </p>
         </div>
       </footer>
     </div>

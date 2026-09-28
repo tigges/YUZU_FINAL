@@ -2,7 +2,7 @@ import { BOOKING_URL, LIVE_SITE_URL } from '../data'
 import { Ext, VersionBar } from '../ui'
 import { versionUrl, versions, type VersionId } from '../versions'
 
-const groups = ['Rebuilt', 'September clones', 'From Round'] as const
+const groups = ['Rebuilt', 'September clones', 'From Round', 'Inspired'] as const
 
 export default function Hub() {
   return (
@@ -17,12 +17,11 @@ export default function Hub() {
       <main id="main" className="wrap hub-main">
         <div className="hub-intro">
           <p className="kicker">Dickens Yard · Ealing</p>
-          <h1>The three directions, the September pages, and two takes on Round.</h1>
+          <h1>The three directions, the September pages, and a Spark-inspired page.</h1>
           <p>
             Round, Instagram, and Hairlust are rebuilt above. Under them, the same three pages
-            copied from the September gallery, unchanged. Japanese keeps Round’s rounded rooms
-            and resets the palette to ink, paper, and a seal. Carousel keeps those rooms and
-            replaces the hero with a sliding feature.
+            copied from the September gallery. Japanese and Carousel keep Round’s rooms. Spark
+            takes the airy Spark Mail layout and sets it in paper, ink, and clay.
           </p>
         </div>
 

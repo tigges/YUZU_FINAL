@@ -6,7 +6,6 @@ import {
   OFFERS_PAGE_URL,
   PATCH_TEST_PDF_URL,
   PRICE_LIST_URL,
-  TERMS_URL,
   WHATSAPP_URL,
   contact,
   extras,
@@ -26,9 +25,11 @@ import {
   Stars,
   VersionBar,
   onSamePage,
+  SocialRow,
   useBodyLock,
   useSection,
 } from '../ui'
+import { LegalArticle, readLegalParam } from '../legal'
 
 const sections = ['top', 'services', 'offers', 'reviews', 'visit'] as const
 
@@ -72,6 +73,8 @@ const facts = [
 ]
 
 export default function Hairlust() {
+  const legal = readLegalParam()
+  const home = `${import.meta.env.BASE_URL}?v=hairlust`
   const [menuOpen, setMenuOpen] = useState(false)
   const current = useSection(sections)
   useBodyLock(menuOpen)
@@ -98,16 +101,16 @@ export default function Hairlust() {
             <MenuIcon open={menuOpen} />
             <span>Menu</span>
           </button>
-          <a className="hl-logo" href="#top" onClick={onSamePage('#top', closeMenu)}>
+          <a className="hl-logo" href={legal ? home : '#top'} onClick={legal ? closeMenu : onSamePage('#top', closeMenu)}>
             <img src={media.wordmark} alt="Yuzu Hair & Beauty" width={400} height={136} />
           </a>
           <nav className="hl-nav" aria-label="Primary">
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
-                onClick={onSamePage(item.href, closeMenu)}
-                aria-current={current === item.href.slice(1) ? 'page' : undefined}
+                href={legal ? `${home}${item.href}` : item.href}
+                onClick={legal ? closeMenu : onSamePage(item.href, closeMenu)}
+                aria-current={!legal && current === item.href.slice(1) ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -115,7 +118,12 @@ export default function Hairlust() {
           </nav>
           <div className="hl-tools">
             <Ext className="hl-tool" href={social.instagram}>
-              Instagram
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="17.4" cy="6.6" r="1" fill="currentColor" />
+              </svg>
+              <span className="vh">Instagram</span>
             </Ext>
             <Ext className="btn hl-book" href={BOOKING_URL}>
               Book
@@ -127,9 +135,9 @@ export default function Hairlust() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
-                onClick={onSamePage(item.href, closeMenu)}
-                aria-current={current === item.href.slice(1) ? 'page' : undefined}
+                href={legal ? `${home}${item.href}` : item.href}
+                onClick={legal ? closeMenu : onSamePage(item.href, closeMenu)}
+                aria-current={!legal && current === item.href.slice(1) ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -141,6 +149,16 @@ export default function Hairlust() {
         ) : null}
       </header>
 
+      {legal ? (
+        <main id="main" className="round-section">
+          <div className="wrap">
+            <a className="round-back" href={home}>
+              ← Home
+            </a>
+            <LegalArticle kind={legal} />
+          </div>
+        </main>
+      ) : (
       <main id="main">
         <section className="hl-hero" id="top" aria-labelledby="hl-hero-title">
           <img
@@ -291,7 +309,7 @@ export default function Hairlust() {
           <div className="wrap">
             <div className="hl-ig-head">
               <h2 id="hl-ig-title">Follow along</h2>
-              <Ext href={social.instagram}>{instagram.handle}</Ext>
+              <SocialRow />
             </div>
             <ul className="hl-ig-grid">
               {instagram.feed.slice(0, 8).map((item) => (
@@ -342,6 +360,7 @@ export default function Hairlust() {
           </div>
         </section>
       </main>
+      )}
 
       <footer className="hl-footer">
         <div className="wrap hl-footer-grid">
@@ -364,14 +383,17 @@ export default function Hairlust() {
           </div>
           <div>
             <h2>Follow</h2>
-            <Ext href={social.instagram}>Instagram</Ext>
-            <Ext href={social.tiktok}>TikTok</Ext>
-            <Ext href={social.facebook}>Facebook</Ext>
-            <Ext href={TERMS_URL}>Terms and conditions</Ext>
+            <SocialRow />
           </div>
         </div>
         <div className="wrap hl-legal">
-          <p>© {new Date().getFullYear()} Yuzu Hair &amp; Beauty · Dickens Yard, Ealing</p>
+          <p>
+            © {new Date().getFullYear()} Yuzu Hair &amp; Beauty · Dickens Yard, Ealing
+            {' · '}
+            <a href={`${home}&p=terms`}>Terms</a>
+            {' · '}
+            <a href={`${home}&p=privacy`}>Privacy</a>
+          </p>
         </div>
       </footer>
       <MobileBook href={BOOKING_URL} />

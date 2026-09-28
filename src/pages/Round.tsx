@@ -5,7 +5,6 @@ import {
   MAPS_DIRECTIONS_URL,
   MAPS_EMBED_URL,
   OFFERS_PAGE_URL,
-  TERMS_URL,
   WHATSAPP_URL,
   contact,
   extras,
@@ -30,6 +29,7 @@ import {
   useBodyLock,
   useSection,
 } from '../ui'
+import { LegalArticle, type LegalKind } from '../legal'
 import RoundCarousel from './RoundCarousel'
 
 const sections = ['top', 'gallery', 'services', 'offers', 'visit'] as const
@@ -45,11 +45,13 @@ const shots = gallery.slice(0, 3)
 
 type RoundVariant = 'round' | 'carousel'
 
-type RoundPage = 'home' | 'prices' | 'questions' | 'patch'
+type RoundPage = 'home' | 'prices' | 'questions' | 'patch' | LegalKind
 
 function readRoundPage(): RoundPage {
   const value = new URLSearchParams(window.location.search).get('p')
-  if (value === 'prices' || value === 'questions' || value === 'patch') return value
+  if (value === 'prices' || value === 'questions' || value === 'patch' || value === 'terms' || value === 'privacy') {
+    return value
+  }
   return 'home'
 }
 
@@ -148,6 +150,8 @@ export default function Round({ variant = 'round' }: { variant?: RoundVariant })
   const pricesHref = `${home}&p=prices`
   const questionsHref = `${home}&p=questions`
   const patchHref = `${home}&p=patch`
+  const termsHref = `${home}&p=terms`
+  const privacyHref = `${home}&p=privacy`
   const page = readRoundPage()
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState<number | null>(null)
@@ -433,7 +437,15 @@ export default function Round({ variant = 'round' }: { variant?: RoundVariant })
             <a className="round-back" href={home}>
               ← Home
             </a>
-            {page === 'prices' ? <PricesBody /> : page === 'questions' ? <QuestionsBody /> : <PatchBody />}
+            {page === 'prices' ? (
+              <PricesBody />
+            ) : page === 'questions' ? (
+              <QuestionsBody />
+            ) : page === 'patch' ? (
+              <PatchBody />
+            ) : (
+              <LegalArticle kind={page} />
+            )}
           </div>
         </main>
       )}
@@ -449,7 +461,9 @@ export default function Round({ variant = 'round' }: { variant?: RoundVariant })
             {' · '}
             <a href={patchHref}>Patch testing</a>
             {' · '}
-            <Ext href={TERMS_URL}>Terms</Ext>
+            <a href={termsHref}>Terms</a>
+            {' · '}
+            <a href={privacyHref}>Privacy</a>
           </p>
         </div>
       </footer>

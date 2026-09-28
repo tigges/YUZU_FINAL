@@ -4,6 +4,7 @@ import Hub from './pages/Hub'
 import Instagram from './pages/Instagram'
 import Japanese from './pages/Japanese'
 import Round from './pages/Round'
+import Spark from './pages/Spark'
 import { HairlustSept, InstagramSept, RoundSept } from './sept/pages'
 import { readVersionParam } from './versions'
 
@@ -16,6 +17,7 @@ const titles: Record<string, string> = {
   'hairlust-sept': 'Hairlust clone · September gallery',
   japanese: 'Japanese · Yuzu Hair & Beauty',
   carousel: 'Carousel · Yuzu Hair & Beauty, Ealing',
+  spark: 'Spark · Yuzu Hair & Beauty, Ealing',
 }
 
 export default function App() {
@@ -24,15 +26,19 @@ export default function App() {
   useEffect(() => {
     document.body.dataset.theme = version ?? 'hub'
     const page = new URLSearchParams(window.location.search).get('p')
-    const roundPages = version === 'round' || version === 'carousel'
+    const withMenu = version === 'round' || version === 'carousel' || version === 'spark'
     document.title =
-      roundPages && page === 'prices'
-        ? 'Prices · Yuzu Hair & Beauty, Ealing'
-        : roundPages && page === 'questions'
-          ? 'Questions · Yuzu Hair & Beauty, Ealing'
-          : roundPages && page === 'patch'
-            ? 'Patch testing · Yuzu Hair & Beauty, Ealing'
-            : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
+      page === 'terms'
+        ? 'Terms and conditions · Yuzu Hair & Beauty'
+        : page === 'privacy'
+          ? 'Privacy · Yuzu Hair & Beauty'
+          : withMenu && page === 'prices'
+            ? 'Prices · Yuzu Hair & Beauty, Ealing'
+            : withMenu && page === 'questions'
+              ? 'Questions · Yuzu Hair & Beauty, Ealing'
+              : withMenu && page === 'patch'
+                ? 'Patch testing · Yuzu Hair & Beauty, Ealing'
+                : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
   }, [version])
 
   if (version === 'round') return <Round />
@@ -43,5 +49,6 @@ export default function App() {
   if (version === 'hairlust-sept') return <HairlustSept />
   if (version === 'japanese') return <Japanese />
   if (version === 'carousel') return <Round variant="carousel" />
+  if (version === 'spark') return <Spark />
   return <Hub />
 }

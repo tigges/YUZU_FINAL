@@ -15,7 +15,8 @@ import {
   reviews,
   services,
 } from '../data'
-import { Ext, MenuIcon, MobileBook, Skip, Stars, VersionBar, onSamePage, useBodyLock, useSection } from '../ui'
+import { Ext, MenuIcon, MobileBook, Skip, SocialRow, Stars, VersionBar, onSamePage, useBodyLock, useSection } from '../ui'
+import { LegalArticle, readLegalParam } from '../legal'
 import './japanese.css'
 
 const sections = ['top', 'gallery', 'services', 'offers', 'visit'] as const
@@ -28,6 +29,8 @@ const nav = [
 ]
 
 export default function Japanese() {
+  const legal = readLegalParam()
+  const home = `${import.meta.env.BASE_URL}?v=japanese`
   const [menuOpen, setMenuOpen] = useState(false)
   const current = useSection(sections)
   useBodyLock(menuOpen)
@@ -39,7 +42,7 @@ export default function Japanese() {
       <Skip />
       <header className={`jp-header${menuOpen ? ' open' : ''}`}>
         <div className="wrap jp-header-inner">
-          <a className="jp-brand" href="#top" onClick={onSamePage('#top', close)}>
+          <a className="jp-brand" href={legal ? home : '#top'} onClick={legal ? close : onSamePage('#top', close)}>
             <span className="jp-seal" aria-hidden="true">柚</span>
             <span>
               <strong>YUZU</strong>
@@ -50,9 +53,9 @@ export default function Japanese() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
-                onClick={onSamePage(item.href, close)}
-                aria-current={current === item.href.slice(1) ? 'page' : undefined}
+                href={legal ? `${home}${item.href}` : item.href}
+                onClick={legal ? close : onSamePage(item.href, close)}
+                aria-current={!legal && current === item.href.slice(1) ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -71,6 +74,16 @@ export default function Japanese() {
         </div>
       </header>
 
+      {legal ? (
+        <main id="main" className="round-section">
+          <div className="wrap">
+            <a className="round-back" href={home}>
+              ← Home
+            </a>
+            <LegalArticle kind={legal} />
+          </div>
+        </main>
+      ) : (
       <main id="main">
         <section className="jp-hero" id="top">
           <p className="jp-vertical" lang="ja">丁寧に、整える</p>
@@ -229,11 +242,17 @@ export default function Japanese() {
           </div>
         </section>
       </main>
+      )}
 
       <footer className="jp-footer">
         <div className="wrap">
           <span>© {new Date().getFullYear()} Yuzu Hair &amp; Beauty</span>
-          <span>{contact.addressLines.join(', ')}</span>
+          <SocialRow />
+          <p>
+            <a href={`${home}&p=terms`}>Terms</a>
+            {' · '}
+            <a href={`${home}&p=privacy`}>Privacy</a>
+          </p>
         </div>
       </footer>
       <MobileBook href={BOOKING_URL} />

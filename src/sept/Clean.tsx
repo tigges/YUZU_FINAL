@@ -21,6 +21,8 @@ const pageHref = (path: string) => {
   if (path === 'about.html') return `${base}?v=round-sept&p=about`
   if (path === 'questions.html') return `${base}?v=round-sept&p=questions`
   if (path === 'prices.html') return `${base}?v=round-sept&p=prices`
+  if (path === 'terms.html') return `${base}?v=round-sept&p=terms`
+  if (path === 'privacy.html') return `${base}?v=round-sept&p=privacy`
   if (path === 'contact.html') return `${base}?v=round-sept#contact`
   return `${base}${path}`
 }
@@ -504,7 +506,12 @@ export default function Clean({
             <a href={pageHref('prices.html')}>Prices</a>
             {' · '}
             <a href={pageHref('contact.html')}>Contact</a>
+            {' · '}
+            <a href={pageHref('terms.html')}>Terms</a>
+            {' · '}
+            <a href={pageHref('privacy.html')}>Privacy</a>
           </p>
+          <CleanSocial />
         </div>
       </footer>
     </div>

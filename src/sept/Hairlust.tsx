@@ -6,14 +6,15 @@ import {
   OFFERS_PAGE_URL,
   PATCH_TEST_PDF_URL,
   PRICE_LIST_URL,
-  TERMS_URL,
   contact,
   gallery,
   instagram,
   reviews,
   social,
 } from '../data'
+import { versionUrl } from '../versions'
 import { v4Assets } from './v4'
+import { SocialLinks } from './SocialLinks'
 
 const offers = [
   {
@@ -251,9 +252,7 @@ export default function Hairlust() {
           <a href={PATCH_TEST_PDF_URL} target="_blank" rel="noreferrer">
             Patch testing
           </a>
-          <a href={social.instagram} target="_blank" rel="noreferrer">
-            Instagram
-          </a>
+          <SocialLinks />
         </div>
       ) : null}
 
@@ -558,18 +557,12 @@ export default function Hairlust() {
             </div>
             <div>
               <h2>Follow</h2>
-              <a href={social.instagram} target="_blank" rel="noreferrer">
-                Instagram
-              </a>
-              <a href={social.tiktok} target="_blank" rel="noreferrer">
-                TikTok
-              </a>
-              <a href={social.facebook} target="_blank" rel="noreferrer">
-                Facebook
-              </a>
-              <a href={TERMS_URL} target="_blank" rel="noreferrer">
-                Terms and conditions
-              </a>
+              <SocialLinks />
+              <p>
+                <a href={`${versionUrl('hairlust-sept')}&p=terms`}>Terms</a>
+                {' · '}
+                <a href={`${versionUrl('hairlust-sept')}&p=privacy`}>Privacy</a>
+              </p>
             </div>
           </div>
         </div>
