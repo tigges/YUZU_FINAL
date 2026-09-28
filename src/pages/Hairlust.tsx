@@ -174,7 +174,7 @@ export default function Hairlust() {
               Japanese-inspired hairdressing at Dickens Yard, two minutes from Ealing Broadway.
               Precision cuts, colour, balayage, and formaldehyde-free smoothing.
             </p>
-            <Ext className="btn hl-cta" href={BOOKING_URL}>
+            <Ext className="btn btn-book hl-cta" href={BOOKING_URL}>
               Book your chair
             </Ext>
           </div>
@@ -215,7 +215,7 @@ export default function Hairlust() {
                   <h3>{item.title}</h3>
                   <p>{item.detail}</p>
                   <p className="hl-from">{item.from}</p>
-                  <Ext className="btn hl-dark" href={BOOKING_URL}>
+                  <Ext className="btn btn-book hl-dark" href={BOOKING_URL}>
                     Book
                   </Ext>
                 </article>
@@ -346,7 +346,7 @@ export default function Hairlust() {
                 ))}
               </ul>
               <div className="round-actions">
-                <Ext className="btn hl-dark" href={BOOKING_URL}>
+                <Ext className="btn btn-book hl-dark" href={BOOKING_URL}>
                   Book on Phorest
                 </Ext>
                 <Ext className="btn hl-stroke" href={MAPS_DIRECTIONS_URL}>

@@ -81,13 +81,13 @@
   min-height: 44px;
   padding: 0 18px;
   border-radius: 999px;
-  background: var(--seal);
+  background: var(--book);
   color: #fff;
   text-decoration: none;
   font-weight: 500;
 }
 
-.jp-book:hover { background: #7c1515; color: #fff; }
+.jp-book:hover { background: var(--book-hover); color: #fff; }
 
 .jp-quiet {
   display: inline-flex;

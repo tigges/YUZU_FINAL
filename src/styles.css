@@ -4,8 +4,8 @@
   --line: #e4dcd2;
   --cream: #f3eee6;
   --paper: #fffdfb;
-  --book: #7a2e28;
-  --book-hover: #5e221e;
+  --book: #2f3b25;
+  --book-hover: #24301c;
   --sage: #31402c;
   --sage-deep: #243024;
   --max: 1120px;
@@ -457,7 +457,7 @@ section[id] { scroll-margin-top: 88px; }
   margin: 0;
   padding: 7px 0;
   transform: rotate(-45deg);
-  background: var(--book);
+  background: #7a2e28;
   color: #fffdfb;
   text-align: center;
   font-size: 0.78rem;
@@ -1070,6 +1070,12 @@ body[data-theme='instagram'] { background: #f6f1ea; color: #243024; }
 .ig-visit .hours { margin-top: 36px; }
 .ig-visit .hours li { border-bottom-color: rgb(255 255 255 / 22%); }
 .ig-visit-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding-top: 28px; }
+.ig-visit .btn-book {
+  background: var(--book);
+  color: #fff;
+  border-color: #f6f1ea;
+}
+.ig-visit .btn-book:hover { background: var(--book-hover); color: #fff; border-color: #fff; }
 .ig-visit .socials a { color: #f6f1ea; }
 .ig-visit .socials a:hover { background: #f6f1ea; color: var(--sage-deep); border-color: #f6f1ea; }
 .ig-footer .socials a { color: #fff; border-color: rgb(255 255 255 / 45%); }
@@ -1106,6 +1112,18 @@ body[data-theme='hairlust'] { background: #fff; color: #141414; }
 .hl-cta:hover { background: #111; color: #fff; border-color: #111; }
 .hl-dark { background: #111; color: #fff; border-color: #111; }
 .hl-dark:hover { background: #fff; color: #111; }
+.hl .btn-book,
+.hl .hl-book {
+  background: var(--book);
+  color: #fff;
+  border-color: var(--book);
+}
+.hl .btn-book:hover,
+.hl .hl-book:hover {
+  background: var(--book-hover);
+  color: #fff;
+  border-color: var(--book-hover);
+}
 .hl-stroke { background: #fff; color: #111; border-color: #111; }
 .hl-stroke:hover { background: #111; color: #fff; }
 

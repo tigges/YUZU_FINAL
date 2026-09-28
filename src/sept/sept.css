@@ -191,13 +191,13 @@ h2 {
 
 .ig .btn.ig-book,
 .btn.ig-book {
-  background: #3d4a36;
-  color: #f7f2ea;
+  background: var(--book);
+  color: #fff;
 }
 
 .ig .btn.ig-book:hover,
 .btn.ig-book:hover {
-  background: #2a3226;
+  background: var(--book-hover);
   color: #fff;
 }
 
@@ -417,13 +417,15 @@ h2 {
 }
 
 .ig-visit .btn.ig-book {
-  background: #f7f2ea;
-  color: #3d4a36;
+  background: var(--book);
+  color: #fff;
+  border: 1px solid #f6f1ea;
 }
 
 .ig-visit .btn.ig-book:hover {
-  background: #fff;
-  color: #2a3226;
+  background: var(--book-hover);
+  color: #fff;
+  border-color: #fff;
 }
 
 .ig-visit .social-row a {
@@ -1674,7 +1676,7 @@ h2 {
   min-height: 42px;
   padding: 0 1.35rem;
   border-radius: 999px;
-  background: #c73229;
+  background: var(--book);
   color: #fff;
   text-decoration: none;
   font-weight: 500;
@@ -1682,7 +1684,7 @@ h2 {
 }
 
 .clean-book:hover {
-  background: #b02b23;
+  background: var(--book-hover);
 }
 
 .clean-dark {
@@ -2458,6 +2460,20 @@ h2 {
   border-color: #111;
 }
 
+.hl a.hl-book-fill,
+.hl a.hl-book-fill:hover,
+.hl a.hl-book-fill:focus-visible,
+.hl a.hl-book-fill:active {
+  background: var(--book);
+  color: #fff;
+  border-color: var(--book);
+}
+
+.hl a.hl-book-fill:hover,
+.hl a.hl-book-fill:focus-visible {
+  background: var(--book-hover);
+}
+
 .hl a.hl-cta-stroke,
 .hl button.hl-cta-stroke {
   background: transparent;
@@ -2640,27 +2656,35 @@ h2 {
 
 .hl-nav-book {
   margin-left: 8px;
-  border: 1px solid currentColor;
+  border: 1px solid var(--book);
+  background: var(--book);
+  color: #fff;
   opacity: 1 !important;
 }
 
 .hl-nav-book:hover,
-.hl-nav-book:focus-visible {
-  background: #fff;
-  color: #111;
-  border-color: #fff;
-}
-
+.hl-nav-book:focus-visible,
 .hl-header.solid .hl-nav-book:hover,
 .hl-header.solid .hl-nav-book:focus-visible,
 .hl-header.open .hl-nav-book:hover,
 .hl-header.open .hl-nav-book:focus-visible,
 .hl-header:hover .hl-nav-book:hover,
 .hl-header:hover .hl-nav-book:focus-visible {
-  background: #111;
+  background: var(--book-hover);
   color: #fff;
-  border-color: #111;
+  border-color: var(--book-hover);
 }
+
+.hl-tool-book {
+  flex-direction: row;
+  background: var(--book);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
+.hl-tool-book .hl-book-dot { display: none; }
+.hl-tool-book:hover { background: var(--book-hover); color: #fff; }
 
 .hl-tools {
   display: flex;

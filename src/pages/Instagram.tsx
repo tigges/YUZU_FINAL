@@ -73,7 +73,7 @@ export default function Instagram() {
                 {item.label}
               </a>
             ))}
-            <Ext className="btn btn-sage" href={BOOKING_URL}>
+            <Ext className="btn btn-book" href={BOOKING_URL}>
               Book
             </Ext>
           </nav>
@@ -120,7 +120,7 @@ export default function Instagram() {
               </li>
             </ul>
             <div className="round-actions">
-              <Ext className="btn btn-sage" href={BOOKING_URL}>
+              <Ext className="btn btn-book" href={BOOKING_URL}>
                 Book your appointment
               </Ext>
               <Ext className="btn btn-ghost" href={social.instagram}>
@@ -254,7 +254,7 @@ export default function Instagram() {
               ))}
             </ul>
             <div className="ig-visit-cta">
-              <Ext className="btn btn-cream" href={BOOKING_URL}>
+              <Ext className="btn btn-book" href={BOOKING_URL}>
                 Book your appointment
               </Ext>
               <SocialRow />

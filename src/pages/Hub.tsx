@@ -69,7 +69,7 @@ export default function Hub() {
             <Ext className="btn btn-ink" href={LIVE_SITE_URL}>
               yuzuhairandbeauty.london
             </Ext>
-            <Ext className="btn btn-ghost" href={BOOKING_URL}>
+            <Ext className="btn btn-book" href={BOOKING_URL}>
               Book on Phorest
             </Ext>
           </div>
