@@ -2,7 +2,7 @@ import { BOOKING_URL, LIVE_SITE_URL } from '../data'
 import { Ext, VersionBar } from '../ui'
 import { versionUrl, versions, type VersionId } from '../versions'
 
-const groups = ['Rebuilt', 'September clones', 'From Round', 'Inspired'] as const
+const groups = ['Rebuilt', 'September clones', 'From Round'] as const
 
 export default function Hub() {
   return (
@@ -19,9 +19,8 @@ export default function Hub() {
           <p className="kicker">Dickens Yard · Ealing</p>
           <h1>The three directions, the September pages, and a Spark-inspired page.</h1>
           <p>
-            Round, Instagram, and Hairlust are rebuilt above. Under them, the same three pages
-            copied from the September gallery. Japanese and Carousel keep Round’s rooms. Spark
-            takes the airy Spark Mail layout and sets it in paper, ink, and clay.
+            Round, Instagram, Spark, and Carousel sit together, then Hairlust. Under them, the
+            same three pages copied from the September gallery. Japanese keeps Round’s rooms.
           </p>
         </div>
 

@@ -457,13 +457,13 @@ section[id] { scroll-margin-top: 88px; }
   margin: 0;
   padding: 7px 0;
   transform: rotate(-45deg);
-  background: #7a2e28;
+  background: var(--book);
   color: #fffdfb;
   text-align: center;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  box-shadow: 0 8px 18px rgb(122 46 40 / 22%);
+  box-shadow: 0 8px 18px rgb(47 59 37 / 22%);
 }
 
 .cr-slides { display: grid; }
