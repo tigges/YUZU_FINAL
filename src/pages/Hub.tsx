@@ -17,11 +17,12 @@ export default function Hub() {
       <main id="main" className="wrap hub-main">
         <div className="hub-intro">
           <p className="kicker">Dickens Yard · Ealing</p>
-          <h1>The three directions, the September pages, and a Japanese Round.</h1>
+          <h1>The three directions, the September pages, and two takes on Round.</h1>
           <p>
             Round, Instagram, and Hairlust are rebuilt above. Under them, the same three pages
             copied from the September gallery, unchanged. Japanese keeps Round’s rounded rooms
-            and resets the palette to ink, paper, and a seal.
+            and resets the palette to ink, paper, and a seal. Carousel keeps those rooms and
+            replaces the hero with a sliding feature.
           </p>
         </div>
 

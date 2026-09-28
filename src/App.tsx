@@ -15,6 +15,7 @@ const titles: Record<string, string> = {
   'instagram-sept': 'Instagram clone · September gallery',
   'hairlust-sept': 'Hairlust clone · September gallery',
   japanese: 'Japanese · Yuzu Hair & Beauty',
+  carousel: 'Carousel · Yuzu Hair & Beauty, Ealing',
 }
 
 export default function App() {
@@ -23,12 +24,13 @@ export default function App() {
   useEffect(() => {
     document.body.dataset.theme = version ?? 'hub'
     const page = new URLSearchParams(window.location.search).get('p')
+    const roundPages = version === 'round' || version === 'carousel'
     document.title =
-      version === 'round' && page === 'prices'
+      roundPages && page === 'prices'
         ? 'Prices · Yuzu Hair & Beauty, Ealing'
-        : version === 'round' && page === 'questions'
+        : roundPages && page === 'questions'
           ? 'Questions · Yuzu Hair & Beauty, Ealing'
-          : version === 'round' && page === 'patch'
+          : roundPages && page === 'patch'
             ? 'Patch testing · Yuzu Hair & Beauty, Ealing'
             : (version && titles[version]) || 'Yuzu Hair & Beauty · design gallery'
   }, [version])
@@ -40,5 +42,6 @@ export default function App() {
   if (version === 'instagram-sept') return <InstagramSept />
   if (version === 'hairlust-sept') return <HairlustSept />
   if (version === 'japanese') return <Japanese />
+  if (version === 'carousel') return <Round variant="carousel" />
   return <Hub />
 }

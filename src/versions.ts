@@ -101,6 +101,20 @@ export const versions = [
     previewAlt: 'Wavy brunette hair, photographed at Yuzu Hair & Beauty',
     origin: null,
   },
+  {
+    id: 'carousel',
+    label: 'Carousel',
+    name: 'Carousel',
+    group: 'From Round',
+    kicker: 'Hero',
+    summary:
+      'Round’s rooms, with a sliding hero: a recent colour, Colour Tuesdays, and the Dickens Yard visit, in the same paper, ink, and clay.',
+    noteLabel: 'Based on',
+    note: 'The Round page. Gallery, services, prices, questions, and visit stay. The hero is a carousel.',
+    preview: asset('assets/clean/hero.jpg'),
+    previewAlt: 'Wavy brunette hair, photographed at Yuzu Hair & Beauty',
+    origin: null,
+  },
 ] as const
 
 export type VersionId = (typeof versions)[number]['id']

@@ -30,6 +30,7 @@ import {
   useBodyLock,
   useSection,
 } from '../ui'
+import RoundCarousel from './RoundCarousel'
 
 const sections = ['top', 'gallery', 'services', 'offers', 'visit'] as const
 
@@ -41,10 +42,8 @@ const nav = [
 ]
 
 const shots = gallery.slice(0, 3)
-const home = `${import.meta.env.BASE_URL}?v=round`
-const pricesHref = `${home}&p=prices`
-const questionsHref = `${home}&p=questions`
-const patchHref = `${home}&p=patch`
+
+type RoundVariant = 'round' | 'carousel'
 
 type RoundPage = 'home' | 'prices' | 'questions' | 'patch'
 
@@ -144,7 +143,11 @@ function QuestionsBody() {
   )
 }
 
-export default function Round() {
+export default function Round({ variant = 'round' }: { variant?: RoundVariant }) {
+  const home = `${import.meta.env.BASE_URL}?v=${variant}`
+  const pricesHref = `${home}&p=prices`
+  const questionsHref = `${home}&p=questions`
+  const patchHref = `${home}&p=patch`
   const page = readRoundPage()
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState<number | null>(null)
@@ -178,7 +181,7 @@ export default function Round() {
 
   return (
     <div className="round">
-      <VersionBar current="round" />
+      <VersionBar current={variant} />
       <Skip />
       <header className={`round-header${menuOpen ? ' open' : ''}`}>
         <div className="wrap round-header-inner">
@@ -221,6 +224,9 @@ export default function Round() {
 
       {page === 'home' ? (
       <main id="main">
+        {variant === 'carousel' ? (
+          <RoundCarousel />
+        ) : (
         <section className="round-hero" id="top" aria-labelledby="round-hero-title">
           <div className="wrap">
             <img
@@ -249,6 +255,7 @@ export default function Round() {
             </div>
           </div>
         </section>
+        )}
 
         <div className="wrap">
           <p className="round-notice">
