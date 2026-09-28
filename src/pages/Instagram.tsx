@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   BOOKING_URL,
   MAPS_DIRECTIONS_URL,
-  OFFERS_PAGE_URL,
   contact,
   instagram,
   offers,
@@ -39,8 +38,125 @@ const nav = [
   { href: '#visit', label: 'Visit' },
 ]
 
+const offersPage = `${import.meta.env.BASE_URL}?v=instagram&p=offers`
+
+const offerStories = [
+  {
+    id: 'tuesdays',
+    kicker: 'Colour Tuesdays',
+    title: '50% off colour',
+    image: offers[0].src,
+    alt: offers[0].alt,
+    paragraphs: [
+      'Every Tuesday, enjoy colour at 50% off. The discount is on your most expensive colour service, with a full-priced wash, cut and blow-dry. Senior stylist.',
+      'Visit the salon or call to take the chair.',
+    ],
+  },
+  {
+    id: 'wednesdays',
+    kicker: 'Smooth Wednesdays',
+    title: '25% off smoothing',
+    image: offers[1].src,
+    alt: offers[1].alt,
+    paragraphs: [
+      'Every Wednesday, 25% off Brazilian blow-dry services. The smoothing and straightening treatment is formaldehyde and ammonia free. Aura smoothing is included.',
+      'Pop in or call the salon to hear how the treatment suits your hair.',
+    ],
+  },
+  {
+    id: 'thursdays',
+    kicker: 'Thursdays',
+    title: '50% off colour',
+    image: offers[2].src,
+    alt: offers[2].alt,
+    paragraphs: [
+      'Every Thursday, the same colour celebration: 50% off your most expensive colour service, with a full-priced wash, cut and blow-dry. Stylist.',
+      'Visit the salon or call to book the Thursday chair.',
+    ],
+  },
+] as const
+
+function OffersPage({ home }: { home: string }) {
+  return (
+    <main id="main" className="ig-offer-page">
+      <div className="wrap">
+        <a className="round-back" href={home}>
+          ← Home
+        </a>
+        <div className="section-head">
+          <p className="kicker">Exclusive offers</p>
+          <h1>Especially for you.</h1>
+          <p>Weekday colour and smoothing, a £10 thank-you for a friend, and 10% when you rebook the same day.</p>
+        </div>
+        <ul className="ig-offer-jump">
+          {offerStories.map((item) => (
+            <li key={item.id}>
+              <a href={`#${item.id}`}>{item.kicker}</a>
+            </li>
+          ))}
+          <li>
+            <a href="#refer">Refer a friend</a>
+          </li>
+          <li>
+            <a href="#rebook">Rebook</a>
+          </li>
+        </ul>
+        {offerStories.map((item) => (
+          <article className="ig-offer-block" id={item.id} key={item.id}>
+            <img src={item.image} alt={item.alt} width={1024} height={1024} />
+            <div>
+              <p className="kicker">{item.kicker}</p>
+              <h2>{item.title}</h2>
+              {item.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <div className="round-actions">
+                <Ext className="btn btn-book" href={BOOKING_URL}>
+                  Book
+                </Ext>
+                <a className="btn btn-ghost" href={contact.phoneHref}>
+                  {contact.phone}
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+        <article className="ig-offer-block ig-offer-note" id="refer">
+          <div>
+            <p className="kicker">Refer a friend</p>
+            <h2>£10 credit</h2>
+            <ol>
+              <li>Share Yuzu with a friend, someone at work, or anyone who wants a salon visit.</li>
+              <li>When they book and complete their first appointment, you receive £10 credit towards your next visit.</li>
+              <li>There is no limit on how many friends you refer, or how much credit you earn.</li>
+            </ol>
+            <Ext className="btn btn-book" href={BOOKING_URL}>
+              Book
+            </Ext>
+          </div>
+        </article>
+        <article className="ig-offer-block ig-offer-note" id="rebook">
+          <div>
+            <p className="kicker">Same-day rebook</p>
+            <h2>10% off the next visit</h2>
+            <p>
+              Rebook before you leave on the day of your appointment and take 10% off that next
+              appointment.
+            </p>
+            <Ext className="btn btn-book" href={BOOKING_URL}>
+              Book
+            </Ext>
+          </div>
+        </article>
+      </div>
+    </main>
+  )
+}
+
 export default function Instagram() {
   const legal = readLegalParam()
+  const onOffers = new URLSearchParams(window.location.search).get('p') === 'offers'
+  const away = Boolean(legal) || onOffers
   const home = `${import.meta.env.BASE_URL}?v=instagram`
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter] = useState<FilterId>('all')
@@ -49,13 +165,21 @@ export default function Instagram() {
   const closeMenu = () => setMenuOpen(false)
   const posts = instagram.feed.filter((item) => filter === 'all' || item.group === filter)
 
+  useEffect(() => {
+    if (!onOffers) return
+    const id = window.location.hash.replace('#', '')
+    if (!id) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    document.getElementById(id)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  }, [onOffers])
+
   return (
     <div className="ig">
       <VersionBar current="instagram" />
       <Skip />
       <header className={`ig-header${menuOpen ? ' open' : ''}`}>
         <div className="wrap ig-header-inner">
-          <a className="ig-logo" href={legal ? home : '#top'} onClick={legal ? closeMenu : onSamePage('#top', closeMenu)}>
+          <a className="ig-logo" href={away ? home : '#top'} onClick={away ? closeMenu : onSamePage('#top', closeMenu)}>
             <img src={instagram.profile} alt="" width={320} height={320} />
             <span>
               <strong>YUZU</strong>
@@ -66,9 +190,15 @@ export default function Instagram() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={legal ? `${home}${item.href}` : item.href}
-                onClick={legal ? closeMenu : onSamePage(item.href, closeMenu)}
-                aria-current={!legal && current === item.href.slice(1) ? 'page' : undefined}
+                href={item.href === '#offers' ? offersPage : away ? `${home}${item.href}` : item.href}
+                onClick={item.href === '#offers' || away ? closeMenu : onSamePage(item.href, closeMenu)}
+                aria-current={
+                  onOffers && item.href === '#offers'
+                    ? 'page'
+                    : !away && current === item.href.slice(1)
+                      ? 'page'
+                      : undefined
+                }
               >
                 {item.label}
               </a>
@@ -98,6 +228,8 @@ export default function Instagram() {
             <LegalArticle kind={legal} />
           </div>
         </main>
+      ) : onOffers ? (
+        <OffersPage home={home} />
       ) : (
       <main id="main">
         <section className="ig-hero wrap" id="top">
@@ -215,7 +347,7 @@ export default function Instagram() {
                   <p className="kicker">{item.kicker}</p>
                   <h3>{item.title}</h3>
                   <p>{item.detail}</p>
-                  <Ext href={OFFERS_PAGE_URL}>Offer details</Ext>
+                  <a href={`${offersPage}#${item.id}`}>Offer details</a>
                 </div>
               </li>
             ))}

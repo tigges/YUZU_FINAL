@@ -30,8 +30,10 @@ export default function App() {
     document.title =
       page === 'terms'
         ? 'Terms and conditions · Yuzu Hair & Beauty'
-        : page === 'privacy'
+        :       page === 'privacy'
           ? 'Privacy · Yuzu Hair & Beauty'
+          : version === 'instagram' && page === 'offers'
+            ? 'Offers · Yuzu Hair & Beauty'
           : withMenu && page === 'prices'
             ? 'Prices · Yuzu Hair & Beauty, Ealing'
             : withMenu && page === 'questions'
