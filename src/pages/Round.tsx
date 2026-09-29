@@ -381,10 +381,12 @@ export default function Round({ variant = 'round' }: { variant?: RoundVariant })
                 room as calm, and one Google review calls Jasmine “a brilliant artist working in
                 hair”.
               </p>
-              <p>
-                Use the name Yuzu Hair &amp; Beauty — that is the Ealing salon, not YUZUHAIR in
-                Hucknall. Open Tuesday to Friday 10am–8pm and Saturday 9am–6pm.
-              </p>
+              {variant === 'carousel' ? null : (
+                <p>
+                  Use the name Yuzu Hair &amp; Beauty — that is the Ealing salon, not YUZUHAIR in
+                  Hucknall. Open Tuesday to Friday 10am–8pm and Saturday 9am–6pm.
+                </p>
+              )}
             </div>
           </div>
         </section>
